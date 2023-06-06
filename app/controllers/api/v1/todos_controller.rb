@@ -35,17 +35,9 @@ class Api::V1::TodosController < ApplicationController
       end
     end
   
-    def destroy_all
-      if Todo.destroy_all
-        head :no_content
-      else
-        render json: { error: "Failed to destroy" }, status: 422
-      end
-    end
-  
     private
   
     def todo_params
-      params.require(:todo).permit(:name, :is_completed)
+      params.require(:todo).permit(:content)
     end
   end
