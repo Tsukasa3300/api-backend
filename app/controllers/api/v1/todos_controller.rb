@@ -40,4 +40,4 @@ class Api::V1::TodosController < ApplicationController
     def todo_params
       params.require(:todo).permit(:content)
     end
-  end
+end
