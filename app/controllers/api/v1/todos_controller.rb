@@ -31,7 +31,8 @@ class Api::V1::TodosController < ApplicationController
       if Todo.destroy(params[:id])
         head :no_content
       else
-        render json: { error: "Fails to destroy" }, status: 422
+        render json: { error: "Failed to destroy" }
+
       end
     end
   
