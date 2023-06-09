@@ -32,7 +32,6 @@ class Api::V1::TodosController < ApplicationController
         head :no_content
       else
         render json: { error: "Failed to destroy" }
-
       end
     end
   
