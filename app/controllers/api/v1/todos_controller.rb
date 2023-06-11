@@ -28,12 +28,10 @@ class Api::V1::TodosController < ApplicationController
   end
   
   def destroy
-    @todo.destroy
-    flash[:success] = "削除しました"
-    if request.referrer.nil?
-      redirect_to request.referrer, status: :see_other
+    if Todo.destroy(params[:id])
+      head :no_content
     else
-      redirect_to request.referrer, status: :see_other
+      render json: { error: "Failed to destroy" }, status: 422
     end
   end
   
