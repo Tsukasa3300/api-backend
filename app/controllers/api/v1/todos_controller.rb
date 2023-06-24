@@ -1,4 +1,6 @@
 class Api::V1::TodosController < ApplicationController
+  before_action :logged_in_user, only: [:destroy, :create]
+
   def index
     todos = Todo.order(updated_at: :desc)
     render json: todos
@@ -14,7 +16,7 @@ class Api::V1::TodosController < ApplicationController
     if todo.save
       render json: todo
     else
-      render json: todo.errors, status: 422
+      render json: todo.errors.errors.full_messages, status: 422
     end
   end
   
@@ -40,4 +42,6 @@ class Api::V1::TodosController < ApplicationController
   def todo_params
     params.require(:todo).permit(:content)
   end
+
+
 end
