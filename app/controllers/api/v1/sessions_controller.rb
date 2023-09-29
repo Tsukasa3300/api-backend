@@ -1,6 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
     include SessionHelper
 
+
     def create
         user_info = JWT.decode(session_params[:access_token], nil, false).first
         user = User.find_by(id: user_info["user_id"])

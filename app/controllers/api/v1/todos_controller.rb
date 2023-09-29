@@ -1,5 +1,4 @@
 class Api::V1::TodosController < ApplicationController
-  before_action :logged_in_user, only: [:destroy, :create]
 
   def index
     todos = Todo.order(updated_at: :desc)
@@ -12,6 +11,7 @@ class Api::V1::TodosController < ApplicationController
   end
   
   def create
+
     todo = Todo.new(todo_params)
     if todo.save
       render json: todo
@@ -44,4 +44,10 @@ class Api::V1::TodosController < ApplicationController
   end
 
 
+  include SessionHelper
+    def logged_in_user
+        unless logged_in?
+            render json: { error: 2 }, status: :unauthorized
+        end
+    end
 end

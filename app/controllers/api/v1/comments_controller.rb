@@ -33,7 +33,7 @@ class Api::V1::CommentsController < ApplicationController
 
           
   def comment_params
-    params.require(:comment).permit(:content, :todo_id)
+    params.require(:comment).permit(:content).merge(todo_id: params[:todo_id])
   end
       
 end
